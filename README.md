@@ -1,6 +1,6 @@
 # YLScratchView
 刮奖.....嗯~就是你想要的那种
-```Object-C
+```Objective-C
 
 - (void)viewDidLoad {
     [super viewDidLoad];
