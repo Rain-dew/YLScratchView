@@ -30,7 +30,7 @@
 
 - (void)scratchMoved:(CGFloat)progress {
     NSLog(@"刮奖百分比：%f",progress);
-    if (progress>=0.35) {//百分之15
+    if (progress>=0.25) {//百分之25
         [self.scratchCard.scratchMask removeFromSuperview];
     }
 }
