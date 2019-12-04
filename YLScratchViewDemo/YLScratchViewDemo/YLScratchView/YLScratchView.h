@@ -8,19 +8,19 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class YLScratchView;
 @protocol YLScratchViewDelegate <NSObject>
 //开始刮奖
-- (void)scratchBegan:(CGPoint)point;
+- (void)scratchView:(YLScratchView *)scratchView beganPoint:(CGPoint)point;
 //刮奖的比例
-- (void)scratchMoved:(CGFloat)progress;
+- (void)scratchView:(YLScratchView *)scratchView movedProgress:(CGFloat)progress;
 //结束刮奖
-- (void)scratchEnded:(CGPoint)point;
+- (void)scratchView:(YLScratchView *)scratchView endedPoint:(CGPoint)point;
 
 @end
 
 @interface YLScratchMaskView : UIImageView
-
+@property(nonatomic, strong) YLScratchView *scratchView;
 
 @end
 

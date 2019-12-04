@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
     //保存当前点坐标
     self.lastPoint = [[touches anyObject] locationInView:self];
     //调用相应的代理方法
-    [self.delegate scratchBegan:self.lastPoint];
+    [self.delegate scratchView:self.scratchView beganPoint:self.lastPoint];
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *__nullable)event {
@@ -45,14 +45,14 @@ NS_ASSUME_NONNULL_BEGIN
     //计算刮开面积的百分比
     CGFloat progress = [self getAlphaPixelPercent:self.image];
     //调用相应的代理方法
-    [self.delegate scratchMoved:progress];
+    [self.delegate scratchView:self.scratchView movedProgress:progress];
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *__nullable)event {
     //多点触摸只考虑第一点
     if (![touches anyObject]) return;
     //调用相应的代理方法
-    [self.delegate scratchEnded:self.lastPoint];
+    [self.delegate scratchView:self.scratchView endedPoint:self.lastPoint];
 }
 //清除两点间的涂层
 - (void)eraseMask:(CGPoint)fromPoint to:(CGPoint)toPoint {
@@ -117,12 +117,32 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface YLScratchView ()
-
-
+@property(nonatomic, assign) CGRect childFrame;
+@property(nonatomic, strong) UIImage *maskImage;
+@property(nonatomic, assign) CGFloat scratchWidth;
+@property(nonatomic, assign) CGLineCap scratchType;
+@property(nonatomic, strong) UIImage *backImage;
 @end
 
 @implementation YLScratchView
-
+- (YLScratchMaskView *)scratchMask {
+    if (!_scratchMask) {
+        _scratchMask = [[YLScratchMaskView alloc] initWithFrame:self.childFrame];
+        _scratchMask.userInteractionEnabled = YES;
+        _scratchMask.scratchView = self;
+        _scratchMask.image = self.maskImage;
+        _scratchMask.lineWidth = self.scratchWidth;
+        _scratchMask.lineType = self.scratchType;
+    }
+    return _scratchMask;
+}
+- (UIImageView *)backImageView {
+    if (!_backImageView) {
+        _backImageView = [[UIImageView alloc] initWithFrame:self.childFrame];
+        _backImageView.image = self.backImage;
+    }
+    return _backImageView;
+}
 - (void)setDelegate:(id __nullable)delegate {
     _delegate = delegate;
     _scratchMask.delegate = delegate;
@@ -131,24 +151,20 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithFrame:(CGRect)frame backImage:(UIImage *)image mask:(UIImage *)maskImage scratchWidth:(CGFloat)scratchWidth scratchType:(CGLineCap)scratchType {
     if (self = [super initWithFrame:frame]) {
         CGRect childFrame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+        self.childFrame = childFrame;
+        self.maskImage = maskImage;
+        self.scratchWidth = scratchWidth;
+        self.scratchType = scratchType;
+        self.backImage = image;
         
         //添加底层券面
-        self.backImageView = [[UIImageView alloc]initWithFrame:childFrame];
-        self.backImageView.image = image;
         [self addSubview:self.backImageView];
-        
         //添加涂层
-        self.scratchMask = [[YLScratchMaskView alloc]initWithFrame:childFrame];
-        self.scratchMask.userInteractionEnabled = YES;
-        self.scratchMask.image = maskImage;
-        self.scratchMask.lineWidth = scratchWidth;
-        self.scratchMask.lineType = scratchType;
         [self addSubview:self.scratchMask];
+        
     }
     return self;
 }
-
-
 
 @end
 
