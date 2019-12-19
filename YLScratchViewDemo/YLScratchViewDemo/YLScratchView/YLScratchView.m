@@ -106,8 +106,6 @@ NS_ASSUME_NONNULL_BEGIN
     }
     
     free(pixelData);
-    
-    
     return ((CGFloat)alphaPixelCount) / ((CGFloat)bitmapByteCount);
     
 }

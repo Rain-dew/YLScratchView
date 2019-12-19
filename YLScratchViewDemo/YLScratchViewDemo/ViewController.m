@@ -39,4 +39,15 @@
     NSLog(@"刮奖结束%f,%f",point.x,point.y);
     
 }
+
+//重置刮奖参考如下代码
+- (void)resetScratch {
+    if (self.scratchView) {
+        [self.scratchView removeFromSuperview];
+    }
+    self.scratchView = [[YLScratchView alloc] initWithFrame:CGRectMake(20, 120, self.view.frame.size.width - 40, 126) backImage:[UIImage imageNamed:@"result_image"] mask:[UIImage imageNamed:@"mask"] scratchWidth:30 scratchType:kCGLineCapSquare];
+    self.scratchView.delegate = self;
+    [self.view addSubview:self.scratchView];
+}
+
 @end
