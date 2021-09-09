@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A93B26F26E9E0DD002809BB /* YLScratchTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93B26E26E9E0DD002809BB /* YLScratchTableView.m */; };
+		0A93B27226E9E11A002809BB /* YLTestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93B27126E9E11A002809BB /* YLTestCell.m */; };
 		0AB2C3CE2394F122001F049F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB2C3CD2394F122001F049F /* AppDelegate.m */; };
 		0AB2C3D42394F122001F049F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB2C3D32394F122001F049F /* ViewController.m */; };
 		0AB2C3D72394F122001F049F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AB2C3D52394F122001F049F /* Main.storyboard */; };
@@ -19,6 +21,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A93B26D26E9E0DD002809BB /* YLScratchTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YLScratchTableView.h; sourceTree = "<group>"; };
+		0A93B26E26E9E0DD002809BB /* YLScratchTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YLScratchTableView.m; sourceTree = "<group>"; };
+		0A93B27026E9E11A002809BB /* YLTestCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YLTestCell.h; sourceTree = "<group>"; };
+		0A93B27126E9E11A002809BB /* YLTestCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YLTestCell.m; sourceTree = "<group>"; };
 		0AB2C3C92394F122001F049F /* YLScratchViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YLScratchViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AB2C3CC2394F122001F049F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0AB2C3CD2394F122001F049F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -70,6 +76,10 @@
 				0AB2C3CD2394F122001F049F /* AppDelegate.m */,
 				0AB2C3D22394F122001F049F /* ViewController.h */,
 				0AB2C3D32394F122001F049F /* ViewController.m */,
+				0A93B26D26E9E0DD002809BB /* YLScratchTableView.h */,
+				0A93B26E26E9E0DD002809BB /* YLScratchTableView.m */,
+				0A93B27026E9E11A002809BB /* YLTestCell.h */,
+				0A93B27126E9E11A002809BB /* YLTestCell.m */,
 				0AB2C3EF23953368001F049F /* result_image.png */,
 				0AB2C3ED23950057001F049F /* mask.png */,
 				0AB2C3D52394F122001F049F /* Main.storyboard */,
@@ -162,9 +172,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A93B26F26E9E0DD002809BB /* YLScratchTableView.m in Sources */,
 				0AB2C3EA23950026001F049F /* YLScratchView.m in Sources */,
 				0AB2C3D42394F122001F049F /* ViewController.m in Sources */,
 				0AB2C3CE2394F122001F049F /* AppDelegate.m in Sources */,
+				0A93B27226E9E11A002809BB /* YLTestCell.m in Sources */,
 				0AB2C3DF2394F128001F049F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,10 +7,11 @@
 //
 
 #import "ViewController.h"
-#import "YLScratchView.h"
-@interface ViewController ()<YLScratchViewDelegate>
-@property(nonatomic, strong) YLScratchView *scratchView;
-
+//#import "YLScratchView.h"
+#import "YLScratchTableView.h"
+#import "YLTestCell.h"
+@interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
+@property(nonatomic, strong) YLScratchTableView *tableView;
 @end
 
 @implementation ViewController
@@ -18,36 +19,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //创建刮刮卡组件
-    self.scratchView = [[YLScratchView alloc] initWithFrame:CGRectMake(20, 120, self.view.frame.size.width - 40, 126) backImage:[UIImage imageNamed:@"result_image"] mask:[UIImage imageNamed:@"mask"] scratchWidth:30 scratchType:kCGLineCapSquare];
-    self.scratchView.delegate = self;
-    [self.view addSubview:self.scratchView];
+    
+    self.tableView = [[YLScratchTableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.rowHeight = 166;
+    self.tableView.tableFooterView = [UIView new];
+    [self.view addSubview:self.tableView];
+    
+    [self.tableView registerClass:[YLTestCell class] forCellReuseIdentifier:@"YLTestCell"];
+    
+
     
 }
 
-- (void)scratchView:(YLScratchView *)scratchView beganPoint:(CGPoint)point {
-    NSLog(@"开始刮奖 %f,%f",point.x,point.y);
-}
 
-- (void)scratchView:(YLScratchView *)scratchView movedProgress:(CGFloat)progress {
-    NSLog(@"刮奖百分比：%f",progress);
-    if (progress>=0.25) {//百分之25
-        [self.scratchView.scratchMask removeFromSuperview];
+- (nonnull UITableViewCell *)tableView:(nonnull YLScratchTableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    if (indexPath.row==3) {
+        YLTestCell *cell = [tableView dequeueReusableCellWithIdentifier:@"YLTestCell" forIndexPath:indexPath];
+        return cell;
+    }else {
+        UITableViewCell *cell = [UITableViewCell new];
+        cell.backgroundColor = [UIColor lightGrayColor];
+        cell.textLabel.text = @"测试行";
+        return cell;
     }
+
 }
 
-- (void)scratchView:(YLScratchView *)scratchView endedPoint:(CGPoint)point {
-    NSLog(@"刮奖结束%f,%f",point.x,point.y);
-    
-}
-
-//重置刮奖参考如下代码
-- (void)resetScratch {
-    if (self.scratchView) {
-        [self.scratchView removeFromSuperview];
-    }
-    self.scratchView = [[YLScratchView alloc] initWithFrame:CGRectMake(20, 120, self.view.frame.size.width - 40, 126) backImage:[UIImage imageNamed:@"result_image"] mask:[UIImage imageNamed:@"mask"] scratchWidth:30 scratchType:kCGLineCapSquare];
-    self.scratchView.delegate = self;
-    [self.view addSubview:self.scratchView];
+- (NSInteger)tableView:(nonnull YLScratchTableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 15;
 }
 
 @end
